@@ -1,1 +1,1 @@
-export default {}
+export  { default as LoaderPacmanComponent } from './Loaders/PacmanLoader'

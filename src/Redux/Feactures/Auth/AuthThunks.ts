@@ -1,54 +1,19 @@
-import {  createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from 'react-toastify';
-import {  PostLoginClient } from "../../../Services/Auth/AuthService";
+import { UserLogInRequest } from '../../../Models/AuthModels';
+import UserSlice, { UserSuccessInterface }  from "./AuthSlice";
+import { AnyAction , ThunkAction } from "@reduxjs/toolkit";
+import { PostLogin } from '../../../Services/Auth/AuthService'
 
 
 
+export const UserActions = UserSlice.actions
 
 
-
-
+export const fetchTodos = (UserData:UserLogInRequest ):ThunkAction<void , UserSuccessInterface , unknown, AnyAction> => {
+    return async(dispatch,getState)=>{
+            const response:UserSuccessInterface = await PostLogin(UserData);
+            dispatch(UserActions.SetUserSuccess(response))       
+    }
+}
   
 
 
-  /************************************************************************************************
- * **********************************************************************************************
- *                                       LOGIN CLIENTE 
- * **********************************************************************************************
- * **********************************************************************************************/
-
-
-
-
-
-   export const fetchPostLoginClient = createAsyncThunk(
-    `Authenticate/fetchPostLoginClient`,
-    async (filtro : any) => {
-      try {
-        const response = await PostLoginClient(filtro);
-        if(String(response?.Message).length > 3 && response?.Data?.Success === true ){   
-        toast.info(response.Message);
-        localStorage.setItem('Token' , response?.Data?.Token);
-        localStorage.setItem('CodigoCliente' , response?.Data?.CodigoCliente);
-        window.location.replace('/Dashboard');
-        }
-        else if(String(response?.Message).length > 3 && response?.Data?.Success === false ){
-        toast.warn(response.Message);
-        }
-        return response;
-      } catch (error) {
-        console.error("Post Login Client", error);
-      }
-    }
-  );
-
-
-
-
-
-
-  /************************************************************************************************
- * **********************************************************************************************
- *                                      END LOGIN CLIENTE 
- * **********************************************************************************************
- * **********************************************************************************************/

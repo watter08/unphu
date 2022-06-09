@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {  AuthenticateSliceThunks } from './Feactures/index';
+import {  UserSlice } from './Feactures/index';
 
-const reducer = {
-  Authenticate : AuthenticateSliceThunks,
+
+let reducer = {
+  User: UserSlice.reducer,
 }
 
 const Store = configureStore({
   reducer: reducer,
   devTools: true,
+
 })
 
 
@@ -16,4 +18,8 @@ const Store = configureStore({
 
 
 
+
+export type AppDispatch = typeof Store.dispatch;
+export type RootState = ReturnType<typeof Store.getState>;
+// export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
 export default Store;

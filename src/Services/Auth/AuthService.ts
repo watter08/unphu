@@ -1,27 +1,5 @@
 import http from '../Config';
-const  Enviroment = {RutaApiAuth : "" } ;
-
-const GetFullRoute = (ruta : string) =>  String(`${Enviroment.RutaApiAuth}${ruta}`);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { UserLogInRequest } from '../../Models/AuthModels';
 
 
 
@@ -32,13 +10,14 @@ const GetFullRoute = (ruta : string) =>  String(`${Enviroment.RutaApiAuth}${ruta
  * **********************************************************************************************/
 
 
+
 //////////////////////////////////////
 //              LOGIN
 //////////////////////////////////////
 
- export const PostLoginClient= async (filtros : Object | any[]) => {
+ export const PostLogin = async (filtros : UserLogInRequest) => {
     try {
-       const data = await http.post(GetFullRoute('UserSignIn'), filtros);
+       const data = await http.post('UserSignIn', filtros);
        return await data.data;
     } catch (error) {
         console.log(error);        
@@ -80,15 +59,5 @@ export const LogOutClient = () => {
 
 
 
-
-
-
- async function GetData(data : Object | any[])  {
-    try {
-        return await data ? data : [];
-    } catch (error) {
-        return []
-    }
-}
 
 

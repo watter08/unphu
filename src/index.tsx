@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './assets/scss/Styles.scss'
 import reportWebVitals from './reportWebVitals';
 import Routes from './Routes/AppRoutes';
 import { Provider } from 'react-redux';
 import store from './Redux/Store';
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/scss/Styles.scss'
+const root = ReactDOM.createRoot( document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
    <Provider store={ store } >

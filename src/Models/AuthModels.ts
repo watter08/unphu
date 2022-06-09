@@ -23,7 +23,7 @@ export interface AuthenticateInitialStateInterface {
 export class LoginInitialState {
     Loading : string;
     Loaded : string;
-    Login : LoginModelInterface | any;
+    Login : LoginModelInterface;
     
     constructor({Loading = "loading" , Loaded ="loaded", Login = new LoginModel({})}) {
         this.Loading = Loading;
@@ -35,7 +35,7 @@ export class LoginInitialState {
 export interface LoginInitialStateInterface {
     Loading : string;
     Loaded : string;
-    Login : LoginModelInterface | any;
+    Login : LoginModelInterface;
     
 }
 export class LoginModel {
@@ -56,3 +56,7 @@ export interface LoginModelInterface {
     Data: any[];
 }
 
+export interface UserLogInRequest{
+    Usuario:string;
+    Password:string
+}

@@ -1,103 +1,36 @@
-import {    createSlice,    PayloadAction  } from "@reduxjs/toolkit";  
-import { useSelector } from "react-redux";
-import * as AuthenticateThunks from "./AuthThunks";
-import { LoginInitialState ,LoginInitialStateInterface  } from '../../../Models/AuthModels';
+import { createSlice , PayloadAction } from '@reduxjs/toolkit'
 
 
 
-  //Thunks
-  
-  const {
-    fetchPostLoginClient,
-  } = AuthenticateThunks;
-  
-  //Initial State
-  const initialState  : LoginInitialStateInterface = new LoginInitialState({}); 
+export interface UserSuccessInterface{
+  Token:string;
+  Usuario:string;
+  CodigoUsuario:string;
+  TipoUsuario:string;
+}
 
-  
-  // Slice Reducer
-  
-  const AuthenticateSlice = createSlice({
-    name: "Authenticate",
-    initialState,
-    reducers: {
-      ClearedLogin(state, action){
-        state.Login = initialState.Login;
-      },
-    },
-    extraReducers: {   
-
-       ////////////////////////////////////////
-      //              LOGIN
-     /////////////////////////////////////////
+export interface UserAllInterface{
+  UserSuccess : UserSuccessInterface;
+}
 
 
-      [fetchPostLoginClient.pending.toString()]: (state , action ) => {
-        state.Login.MessageStatus = initialState.Loading;
-      },
-      [fetchPostLoginClient.fulfilled.type]: (state , action) => {
-        state.Login.Data = action.payload;
-        state.Login.MessageStatus = initialState.Loaded;
-      },
+const InitialTodoState:UserAllInterface = {
+    UserSuccess:{
+      Token:'',
+      Usuario:'',
+      CodigoUsuario:'',
+      TipoUsuario:''
+    }
+}
 
+const UserSlice = createSlice({
+    name : 'User',
+    initialState:InitialTodoState,
+    reducers:{
+      SetUserSuccess(state , action : PayloadAction<UserSuccessInterface>){
+            state.UserSuccess = action.payload;
+        },
+    }
+})
 
-
-        ////////////////////////////////////////
-       //          END LOGIN
-      ////////////////////////////////////////
-
-
-
-    },
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//                                          TB NEWLETTER
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-export const SelectorPostLoginClient = (state : any ) =>  state.Authenticate.Login.Data;
-export const SelectorPostLoginClientStatus = (state : any ) => state.Authenticate.Login.MessageStatus;
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//                                          END TB NEWLETTER
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-  
-  export default AuthenticateSlice.reducer;
-  
-  export const {
-    ClearedLogin,
-  } = AuthenticateSlice.actions;
-  
-  //thunk functions
-  export { AuthenticateThunks  };
-  export { AuthenticateSlice };
-  
-
+export default UserSlice;

@@ -9,9 +9,13 @@
  //                              Authenticate Slice Thunks                            //
 ///////////////////////////////////////////////////////////////////////////////////
 
-export { default as AuthenticateSliceThunks } from './Auth/AuthSlice';
+// export { default as AuthenticateSliceThunks } from './Auth/AuthSlice';
 
 
   /////////////////////////////////////////////////////////////////////////////////////
  //                       End Authenticate Slice Thunks                            //
 ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+export { default as UserSlice } from './Auth/AuthSlice'

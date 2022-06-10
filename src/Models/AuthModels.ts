@@ -56,7 +56,7 @@ export interface LoginModelInterface {
     Data: any[];
 }
 
-export interface UserLogInRequest{
+export interface UserLogInRequestInterface{
     Usuario:string;
     Password:string
 }

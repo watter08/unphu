@@ -22,14 +22,14 @@ const InputComponent = ({
     IsDisable = false,
     Min = Number.MIN_VALUE,
     Max = Number.MAX_VALUE,
-    InputLabelColor = 'H-7-P',
+    InPutClassName = ''
 }: InputComponentInterface) => {
 
     
 
     return (
         <div className={"form-group text-center p-1"}>
-            {String(Label).length > 0 && (<Form.Label className={`${InputLabelColor}`} htmlFor={HtmlFor ? HtmlFor : Name}>{Label}</Form.Label>)}
+            {String(Label).length > 0 && (<Form.Label className={`${InPutClassName}`} htmlFor={HtmlFor ? HtmlFor : Name}>{Label}</Form.Label>)}
             <Form.Control
                 className={`form-control ${isInvalidInput(Errors, Name) ? "is-invalid" : "" } `}
                 type={Type}

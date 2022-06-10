@@ -1,5 +1,5 @@
 import http from '../Config';
-import { UserLogInRequest } from '../../Models/AuthModels';
+import { UserLogInRequestInterface } from '../../Models/AuthModels';
 
 
 
@@ -15,7 +15,7 @@ import { UserLogInRequest } from '../../Models/AuthModels';
 //              LOGIN
 //////////////////////////////////////
 
- export const PostLogin = async (filtros : UserLogInRequest) => {
+ export const PostLogin = async (filtros : UserLogInRequestInterface) => {
     try {
        const data = await http.post('UserSignIn', filtros);
        return await data.data;

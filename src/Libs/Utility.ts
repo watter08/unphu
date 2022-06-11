@@ -23,3 +23,13 @@ import { toast } from 'react-toastify';
      return bole;
  
  };
+
+
+  /*************************************************************
+ * IS VALID PASSWORD
+ * **********************************************************/
+
+   export const isValidPassword = (pass : string)  => {
+    const regEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    return (pass && pass.match(regEx)) ? true : false;
+  }

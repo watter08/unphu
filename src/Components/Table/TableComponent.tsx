@@ -37,7 +37,7 @@ const TableComponent = ({
 
     const handleOnClickPagination = (current: number) => {
         setSortInputTable(prevState => { return { ...prevState, CurrentPage: current } });
-        SortableWithPagination(current ,"");
+        SortableWithPagination(current);
     }
 
     const SortableWithPagination = (current: number , sort?:string) => {

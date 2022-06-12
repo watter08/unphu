@@ -4,7 +4,7 @@ import $ from 'jquery'
 const PreLoader = () => {
 
   useEffect(() => {
-    const timer = setTimeout(() => $('#js-preloader').addClass('loaded'), 4000);
+    const timer = setTimeout(() => $('#js-preloader').addClass('loaded'), 2000);
     return () => clearTimeout(timer);
   }, []);
 

@@ -8,6 +8,7 @@ import store from './Redux/Store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/scss/Styles.scss'
 const root = ReactDOM.createRoot( document.getElementById('root') as HTMLElement);
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 root.render(
   <React.StrictMode>
    <Provider store={ store } >

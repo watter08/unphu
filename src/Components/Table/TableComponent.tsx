@@ -63,12 +63,12 @@ const TableComponent = ({
     useEffect(() => {
         if (Columns.length > 0 && Data.length > 0)
             SortableWithPagination(0);
-    }, [])
+    }, [Data])
 
     return (
         <>
             {HasContainer === true ? (
-                <Container style={{ overflow: "scroll-y", minHeight: "400px", maxWidth: "65vw !important;" }} >
+                <Container style={{ overflow: "scroll-y", minHeight: "400px", maxWidth: "65vw !important" }} >
 
                     <Row>
                         <Col>
@@ -99,7 +99,7 @@ const TableComponent = ({
                                     <Table striped={true} bordered={true} hover={true}>
                                         <thead className={`${TheadCss}`}>
                                             <tr>
-                                                {Columns && Columns.map(value => (<th>{value.Header}</th>))}
+                                                {Columns && Columns.map(value => (<th key={value.Header}>{value.Header}</th>))}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,7 +107,7 @@ const TableComponent = ({
                                                 <tr>
                                                     {value.map((val: any) => (
                                                         <>
-                                                            <td>{val}</td>
+                                                            <td key={index}>{val}</td>
                                                         </>
                                                     ))}
                                                 </tr>
@@ -133,7 +133,7 @@ const TableComponent = ({
                     </Row>
                 </Container>
             ) : (
-                <Container style={{ overflow: "scroll-y", minHeight: "400px", maxWidth: "65vw !important;" }} >
+                <Container style={{ overflow: "scroll-y", minHeight: "400px", maxWidth: "65vw !important" }} >
 
                     <Row>
                         <Col>

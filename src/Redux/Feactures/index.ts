@@ -5,12 +5,6 @@
 
 
 
-  /////////////////////////////////////////////////////////////////////////////////////
- //                              Authenticate Slice Thunks                            //
-///////////////////////////////////////////////////////////////////////////////////
-
-// export { default as AuthenticateSliceThunks } from './Auth/AuthSlice';
-
 
   /////////////////////////////////////////////////////////////////////////////////////
  //                       End Authenticate Slice Thunks                            //
@@ -19,3 +13,5 @@
 
 
 export { default as UserSlice } from './Auth/AuthSlice'
+export { default as UsersListSlice } from './Users/UsersSlice'
+export { default as DashboardSlice} from './Dashboard/DashboardSlice'

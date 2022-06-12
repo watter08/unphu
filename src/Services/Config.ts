@@ -1,8 +1,7 @@
-import axios from "axios";
-const  Enviroment = {RutaApi : "" } ;
+import axios, { Axios } from "axios";
+const  Enviroment = {RutaApi : "http://getdataforcrud20220612122900.azurewebsites.net/" } ;
 
-axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+
 // For GET requests
 axios.interceptors.request.use(
   (req) => {
@@ -29,10 +28,13 @@ axios.interceptors.response.use(
 
 
 axios.create({
-  baseURL: String(Enviroment.RutaApi),
+  baseURL: "https://getdataforcrud20220612122900.azurewebsites.net/",
   headers: {
-    "Content-type": "application/json",
-    "Access-Control-Allow-Origin": "*"
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    'Access-Control-Allow-Methods': 'DELETE, PUT, GET, POST,OPTIONS',
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Content-Length, X-Requested-With, Accept",
   }
 });
 
@@ -45,9 +47,11 @@ const MethodPost = async (url : string , data : any) =>  await( axios.post(url ,
 
 const GetHeadersConfig = async () => {
   return await {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    'Access-Control-Allow-Methods': 'DELETE, PUT, GET, POST',
-    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept",
+    'Access-Control-Allow-Methods': 'DELETE, PUT, GET, POST,OPTIONS',
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Content-Length, X-Requested-With, Accept",
     
   }
 }

@@ -3,23 +3,26 @@ import { createSlice , PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface UserSuccessInterface{
+  Id:number;
   Token:string;
   Usuario:string;
-  CodigoUsuario:string;
-  TipoUsuario:string;
+  TipoUsuario:number;
+  NombreCompleto:string;
+  CorreoElectronico:string;
 }
 
 export interface UserAllInterface{
   UserSuccess : UserSuccessInterface;
 }
 
-
 const InitialTodoState:UserAllInterface = {
     UserSuccess:{
+      Id:0,
       Token:'',
       Usuario:'',
-      CodigoUsuario:'',
-      TipoUsuario:''
+      NombreCompleto:'',
+      CorreoElectronico:'',
+      TipoUsuario:0
     }
 }
 

@@ -1,5 +1,5 @@
 import http from '../Config';
-import { UserLogInRequestInterface } from '../../Models/AuthModels';
+import { UserLogInRequestInterface, IUserAuthenticate } from '../../Models/AuthModels';
 
 
 
@@ -17,7 +17,9 @@ import { UserLogInRequestInterface } from '../../Models/AuthModels';
 
  export const PostLogin = async (filtros : UserLogInRequestInterface) => {
     try {
-       const data = await http.post('UserSignIn', filtros);
+       let data:IUserAuthenticate | any= await http.post('https://getdataforcrud20220612122900.azurewebsites.net/PostLogIn' , filtros);
+       if(String(data.data.token.length > 0))
+        SetUserAuthenticate(data.data)
        return await data.data;
     } catch (error) {
         console.log(error);        
@@ -36,13 +38,22 @@ import { UserLogInRequestInterface } from '../../Models/AuthModels';
 export const LogOutClient = () => {
     try {
         localStorage.removeItem('Token');
-        localStorage.removeItem('CodigoCliente');
+        localStorage.removeItem('Usuario');
         return window.location.replace('/');
     } catch (error) {
         console.log(error);
     }
 }
 
+export const SetUserAuthenticate = (User:IUserAuthenticate | any) => {
+    try {
+        localStorage.setItem('Usuario', JSON.stringify(User));
+        localStorage.setItem('Token',User.token);
+        return window.location.replace('/Dashboard');
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 

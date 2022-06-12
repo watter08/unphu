@@ -74,7 +74,7 @@ const UsersFormComponent = () => {
                 <Card className="text-center ">
                     <Card.Header className='text-dark'>Agregar Usuario</Card.Header>
                     <Card.Body className="text-dark">
-                        <Container style={{ overflow: "scroll", height: "400px", maxWidth: "65vw;" }} >
+                        <Container style={{ overflow: "scroll", height: "400px", maxWidth: "65vw" }} >
                             <Row>
                                 <div className="col-sm-6 col-md-4 mb-2 ">
                                     <InputComponent

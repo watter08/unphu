@@ -1,7 +1,11 @@
 import { LoaderPacmanComponent, InputComponent } from "../Components";
+import { fetchLogInUser } from '../Redux/Feactures/Auth/AuthThunks';
 import { useForm } from "../Hooks";
 import { GetUuId, isValidPassword } from "../Libs/Utility";
 import { UserLogInRequestInterface } from "../Models/AuthModels";
+import { useAppDispatch, useAppSelector } from "../Hooks/useReduxHooks";
+import { UserSuccessInterface } from "../Redux/Feactures/Auth/AuthSlice";
+import { useEffect } from "react";
 
 
 const LoginPageComponent = () => {
@@ -12,10 +16,12 @@ const LoginPageComponent = () => {
 
   const InitialState: InitialLoginState = {
     Formulario: {
+      Id:0,
       Usuario: '',
       Password: ''
     },
     Ids: {
+      Id:0,
       Usuario: GetUuId(),
       Password: GetUuId()
     }
@@ -28,11 +34,21 @@ const LoginPageComponent = () => {
     }
   })
 
-  const handleSubmitResquest = () => { }
+ 
+  const dispatch = useAppDispatch();
+  const UserSuccess = useAppSelector(state => state.User.UserSuccess);
+
+  const handleSubmitResquest = () => {
+    dispatch(fetchLogInUser(state.Formulario));
+ }
 
   const { handleChangeInput, handleSubmit, errors, state, setState, setStateErrors } = useForm<InitialLoginState>(InitialState, Validations, handleSubmitResquest);
 
 
+  useEffect(() => {
+    if(!(UserSuccess?.Id > 0)) return
+    console.table(UserSuccess)
+  },[UserSuccess])
   return (
     <>
       <LoaderPacmanComponent />
@@ -56,8 +72,7 @@ const LoginPageComponent = () => {
               <div id="radius-shape-2" className="position-absolute shadow-5-strong"></div>
 
               <div className="card bg-glass">
-                <div className="card-body px-4 py-5 px-md-5">
-                  <form>
+                <div className="card-body px-4 py-5 px-md-5">                
                     <div className="row">
                       <div className="col-md-6 mb-4">
                         <InputComponent
@@ -89,11 +104,10 @@ const LoginPageComponent = () => {
                         />
                       </div>
 
-                      <button type="submit" className="btn btn-primary btn-block mb-4">
+                      <button className="btn btn-primary btn-block mb-4" onClick={() => handleSubmitResquest()}>
                         Ingresar
                       </button>
-                    </div>
-                  </form>
+                    </div>           
                 </div>
               </div>
             </div>

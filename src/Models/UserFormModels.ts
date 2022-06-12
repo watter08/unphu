@@ -2,11 +2,11 @@ export class UsersRequest {
     Nombres: string;
     PrimerApellido: string;
     SegundoApellido: string;
-    Cédula: string;
+    Cedula: string;
     Edad: number;
-    Género: string;
-    Dirección: Direcciones[];
-    Teléfono: string;
+    Genero: string;
+    Direccion: Direcciones[];
+    Telefono: string;
     Correo: string;
     EstadoCivil: string;
     TienesHijos: boolean;
@@ -29,11 +29,11 @@ export class UsersRequest {
         this.Nombres = Nombres;
         this.PrimerApellido = PrimerApellido;
         this.SegundoApellido = SegundoApellido;
-        this.Cédula = Cédula;
+        this.Cedula = Cédula;
         this.Edad = Edad;
-        this.Género = Género;
-        this.Dirección = Dirección;
-        this.Teléfono = Teléfono;
+        this.Genero = Género;
+        this.Direccion = Dirección;
+        this.Telefono = Teléfono;
         this.Correo = Correo;
         this.EstadoCivil = EstadoCivil;
         this.TienesHijos = TienesHijos;
@@ -57,25 +57,44 @@ export class Direcciones {
     }
 }
 
+export interface IUserForm{
+    Formulario:IUsersRequest;
+    Ids:IUsersRequestIds;
+}
 
-export interface UsersRequest {
+export interface IUsersRequest {
     Nombres: string;
     PrimerApellido: string;
     SegundoApellido: string;
-    Cédula: string;
+    Cedula: string;
     Edad: number;
-    Género: string;
-    Dirección: Direcciones[];
-    Teléfono: string;
+    Genero: string;
+    Direccion: Direcciones[];
+    Telefono: string;
     Correo: string;
     EstadoCivil: string;
     TienesHijos: boolean;
     FechaNacimiento: Date;
 
 }
+export interface IUsersRequestIds {
+    Nombres: string;
+    PrimerApellido: string;
+    SegundoApellido: string;
+    Cedula: string;
+    Edad: string;
+    Genero: string;
+    Direccion: string;
+    Telefono: string;
+    Correo: string;
+    EstadoCivil: string;
+    TienesHijos: string;
+    FechaNacimiento: string;
+
+}
 
 
-export interface Direcciones {
+export interface IDirecciones {
     Calle: string;
     Sector: string;
     Municipio: string;

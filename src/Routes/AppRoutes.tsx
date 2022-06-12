@@ -6,10 +6,10 @@ import { GetUuId } from '../Libs/Utility';
 
 const LoginPageComponent = React.lazy(() => import('../Pages/Login'));
 const UsersFormPageComponent = React.lazy(() => import('../Pages/UsersForm'));
-
+const UserListPageComponent = React.lazy(() => import('../Pages/UserList'));
 function AppRoutes() : JSX.Element {
 
-  const Keys = {LoginPageComponent: GetUuId() , UsersFormPageComponent : GetUuId() }
+  const Keys = {LoginPageComponent: GetUuId() , UsersFormPageComponent : GetUuId(),UserListPageComponent : GetUuId() }
   const [pagesKeys, setPagesKeys] = useState(Keys);
 
   return (
@@ -20,6 +20,7 @@ function AppRoutes() : JSX.Element {
           {/* <Route element={<ProtectedRoute />} > */}
           <Route element={<AdminLayoutComponent />}>
             <Route path={`${process.env.PUBLIC_URL}/UsersForm`} element={<UsersFormPageComponent key={pagesKeys.UsersFormPageComponent} />} />
+            <Route path={`${process.env.PUBLIC_URL}/UserList`} element={<UserListPageComponent key={pagesKeys.UserListPageComponent} />} />
           </Route>
           {/* </Route>   */}
       </Routes>

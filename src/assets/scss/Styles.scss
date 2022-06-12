@@ -1,5 +1,17 @@
 @import url(./AdminLayout.scss);
 
+
+.table{   
+    border-radius: 10px 10px 0 0 !important;
+    overflow: hidden !important;
+}
+
+.text-purple {
+    color: #130F40;
+    font-size: 1rem;
+    font-weight: 400;
+    
+}
 .js-preloader {
     position: fixed;
     top: 0;

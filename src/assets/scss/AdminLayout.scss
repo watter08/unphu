@@ -10,9 +10,22 @@
     --blueColor:#1266F1;
     --Dark:#262626;
     --LigthBlue:#39C0ED;
+    --WhiteColor:#fff;
 }
 body{
   overflow: hidden;
+}
+
+.DarkBgHeader{
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    color:#fff;
+}
+.PupleBG{
+background-color: #4d5dfb;
+background-image: linear-gradient(315deg, #4d5dfb 15%, #08c8f6 85%);
+    
+color: #FFF;
 }
 .sidebar{
   position: fixed;
@@ -32,7 +45,8 @@ body{
 .sidebar .logo-details {
     display: flex;
     justify-content: flex-end;
-    padding-right: 20px;
+    padding-top: 10px;
+    padding-right: 15px;
 }
 
 .sidebar .nav-links{
@@ -52,14 +66,14 @@ body{
   transition: all 0.4s ease;
 }
 .sidebar .nav-links li:hover{
-  background: var(--blueColor);
-  color: #fff;
+  background: var(--WhiteColor);
+  color: var(--Dark)
 }
 .sidebar .nav-links li:hover a .link_name{
-    color: #fff;
+    color: var(--Dark);
   }
   .sidebar .nav-links li:hover i{
-    color: #fff;
+    color: var(--Dark)k;
   }
 
 .sidebar .nav-links li .iocn-link{
@@ -76,7 +90,7 @@ body{
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-  color: var(--blueColor);
+  color: var(--WhiteColor);
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -95,7 +109,7 @@ body{
 .sidebar .nav-links li a .link_name{
   font-size: 18px;
   font-weight: 400;
-  color: var(--blueColor);
+  color: var(--WhiteColor);
   transition: all 0.4s ease;
 }
 
@@ -240,6 +254,42 @@ body{
   font-weight: 600;
 }
 
+@media screen and (max-width: 768px) {
+    .sidebar{
+      width: 240px;
+    }
+    .sidebar.close{
+      width: 78px;
+    }
+    .sidebar .profile-details{
+      width: 240px;
+    }
+    .sidebar.close .profile-details{
+      background: none;
+    }
+    .sidebar.close .profile-details{
+      width: 78px;
+    }
+    .home-section{
+      left: 240px;
+      width: calc(100% - 240px);
+    }
+    .sidebar.close ~ .home-section{
+      left: 78px;
+      width: calc(100% - 78px);
+    }
+    .waves {
+        height:40px;
+        min-height:40px;
+      }
+      .content {
+        height:30vh;
+      }
+      h1 {
+        font-size:24px;
+      }
+  }
+
 @media screen and (max-width: 400px){
   .sidebar{
     width: 240px;
@@ -282,7 +332,7 @@ label.MenuHanbButton{
    }
    
    label.MenuHanbButton span{
-     background: var(--blueColor);
+     background: var(--WhiteColor);
      border-radius:10px;
      height:7px;
      margin: 4px 0;
@@ -306,7 +356,7 @@ label.MenuHanbButton{
    
    .MenuHanbButton input[type="checkbox"]:checked ~ span:nth-of-type(1){
      transform-origin:bottom;
-     transform:rotatez(45deg) translate(8px,-1px)
+     transform:rotatez(45deg) translate(7px,0px)
    }
    
    
@@ -320,7 +370,7 @@ label.MenuHanbButton{
      
      transform-origin:bottom;
      width:50%;
-     transform: translate(22px,-10px) rotatez(45deg);
+     transform: translate(20px,-10px) rotatez(45deg);
    
    }
    
@@ -346,7 +396,7 @@ label.MenuHanbButton{
   }
   
   .inner-header {
-    height:65vh;
+    height:85vh;
     width:100%;
     margin: 0;
     padding: 0;
@@ -402,18 +452,5 @@ label.MenuHanbButton{
     }
     100% { 
       transform: translate3d(85px,0,0);
-    }
-  }
-  /*Shrinking for mobile*/
-  @media (max-width: 768px) {
-    .waves {
-      height:40px;
-      min-height:40px;
-    }
-    .content {
-      height:30vh;
-    }
-    h1 {
-      font-size:24px;
     }
   }

@@ -1,54 +1,256 @@
-
-
+import { BGWaveComponent } from '../Components/';
+import { Card, Button, Container, Row } from 'react-bootstrap'
+import { LoaderPacmanComponent, InputComponent } from "../Components";
+import { useForm } from "../Hooks";
+import { GetUuId, IsValidDni, isValidPhone, isValidEmail, IsAnAdult } from "../Libs/Utility";
+import { IUserForm } from '../Models/UserFormModels'
 
 
 const UsersFormComponent = () => {
-    return(
+
+   
+
+
+    const InitialState: IUserForm = {
+        Formulario: {
+            Nombres: "",
+            PrimerApellido: "",
+            SegundoApellido: "",
+            Cedula: "",
+            Edad: 0,
+            Genero: "",
+            Direccion: [],
+            Telefono: "",
+            Correo: "",
+            EstadoCivil: "",
+            TienesHijos: false,
+            FechaNacimiento: new Date(),
+        },
+        Ids: {
+            Nombres: GetUuId(),
+            PrimerApellido: GetUuId(),
+            SegundoApellido: GetUuId(),
+            Cedula: GetUuId(),
+            Edad: GetUuId(),
+            Genero: GetUuId(),
+            Direccion: GetUuId(),
+            Telefono: GetUuId(),
+            Correo: GetUuId(),
+            EstadoCivil: GetUuId(),
+            TienesHijos: GetUuId(),
+            FechaNacimiento: GetUuId(),
+        }
+    }
+
+    const Validations = Object.freeze({
+        Formulario: {
+            Nombres: (name: string) => String(name).length < 4 ? 'Los Nombres Deben Tener Al Menos 4 Caracteres' : "",
+            PrimerApellido: (lastName: string) => String(lastName).length < 4 ? 'El Primer Apellido Debe Tener Al Menos  Caracteres' : "",
+            SegundoApellido: (lastName: string) => String(lastName).length < 0 ? 'El Segundo Apellido Debe Tener Al Menos 1 Caracteres' : "",
+            Cedula: (numero: string) => !IsValidDni(numero) ? 'Cedula Invalida' : "",
+            Edad: (edad: number) => Number(edad) > 17 ? 'El Usuario Debe Ser Mayor De Edad' : "",
+            Genero: (genero: string) => String(genero).length < 4 ? 'Debes Seleccionar Un Genero' : "",
+            Direccion: (direccion: any[]) => !(Array(direccion).length > 0) ? 'Debe Ingresar Al Menos Una Direccion' : "",
+            Telefono: (tel: string) => !isValidPhone(tel) ? 'Telefono Invalido' : "",
+            Correo: (email: string) => !isValidEmail(email) ? 'Correo Invalido' : "",
+            EstadoCivil: (civil: string) => String(civil).length < 4 ? 'Elija Un Estado Civil' : "",
+            TienesHijos: (child: number) => Number(child) < 0 ? 'Cantidad Invalido De Hijos' : '',
+            FechaNacimiento: (date: Date) => !IsAnAdult(date, 18) ? 'Usuario No Tiene La Edad Correcta Para Trabajar' : '',
+        }
+    })
+
+    const handleSubmitResquest = () => { }
+
+    const { handleChangeInput, handleSubmit, errors, state, setState, setStateErrors } = useForm<IUserForm>(InitialState, Validations, handleSubmitResquest);
+
+
+
+    return (
         <>
-        
-        
-<div className="header">
 
-{/* <!--Content before waves--> */}
-<div className="inner-header flex">
-{/* <!--Just the logo.. Don't mind this--> */}
-<svg version="1.1" className="logo" baseProfile="tiny" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500" xmlSpace="preserve">
-<path fill="#FFFFFF" stroke="#000000" stroke-width="10" stroke-miterlimit="10" d="M57,283" />
-<g><path fill="#fff"
-d="M250.4,0.8C112.7,0.8,1,112.4,1,250.2c0,137.7,111.7,249.4,249.4,249.4c137.7,0,249.4-111.7,249.4-249.4
-C499.8,112.4,388.1,0.8,250.4,0.8z M383.8,326.3c-62,0-101.4-14.1-117.6-46.3c-17.1-34.1-2.3-75.4,13.2-104.1
-c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3,62.4c-19.8,19.1-51.6,26.9-100.2,24.6l1.8-39.7		c35.9,1.6,59.7-2.9,70.8-13.6c8.9-8.6,11.1-22.9,13.5-39.6c6.3-42,14.8-99.4,141.4-99.4h41L333,166c-12.6,16-45.4,68.2-31.2,96.2	c9.2,18.3,41.5,25.6,91.2,24.2l1.1,39.8C390.5,326.2,387.1,326.3,383.8,326.3z" />
-</g>
-</svg>
-<h1>Simple CSS Waves</h1>
-</div>
 
-{/* <!--Waves Container--> */}
-<div>
-<svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-<defs>
-<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
-</defs>
-<g className="parallax">
-<use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
-<use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
-<use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
-<use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
-</g>
-</svg>
-</div>
-{/* <!--Waves end--> */}
+            <BGWaveComponent Title="Formulario De Usuarios" >
+                <br />
+                <Card className="text-center ">
+                    <Card.Header className='text-dark'>Agregar Usuario</Card.Header>
+                    <Card.Body className="text-dark">
+                        <Container style={{ overflow: "scroll", height: "400px", maxWidth: "65vw;" }} >
+                            <Row>
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Nombres"
+                                        Name="Nombres"
+                                        Value={state.Formulario.Nombres}
+                                        ControlId={state.Ids.Nombres}
+                                        TextId={state.Ids.Nombres}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Nombres}
+                                        Errors={errors}
+                                        PlaceHolder="Juan12....."
+                                    />
+                                </div>
 
-</div>
-{/* <!--Header ends--> */}
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="PrimerApellido"
+                                        Name="PrimerApellido"
+                                        Value={state.Formulario.PrimerApellido}
+                                        ControlId={state.Ids.PrimerApellido}
+                                        TextId={state.Ids.PrimerApellido}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.PrimerApellido}
+                                        Errors={errors}
+                                        PlaceHolder="Perez...."
+                                    />
+                                </div>
 
-{/* <!--Content starts--> */}
-<div className="content flex">
-  <p>By.Goodkatz | Free to use </p>
-</div>
-{/* <!--Content ends--> */}
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="SegundoApellido"
+                                        Name="SegundoApellido"
+                                        Value={state.Formulario.SegundoApellido}
+                                        ControlId={state.Ids.SegundoApellido}
+                                        TextId={state.Ids.SegundoApellido}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.SegundoApellido}
+                                        Errors={errors}
+                                        PlaceHolder="Juan12....."
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Cedula"
+                                        Name="Cedula"
+                                        Value={state.Formulario.Cedula}
+                                        ControlId={state.Ids.Cedula}
+                                        TextId={state.Ids.Cedula}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Cedula}
+                                        Errors={errors}
+                                        PlaceHolder="223......"
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Genero"
+                                        Name="Genero"
+                                        Value={state.Formulario.Genero}
+                                        ControlId={state.Ids.Genero}
+                                        TextId={state.Ids.Genero}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Genero}
+                                        Errors={errors}
+                                        PlaceHolder="Masculino....."
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Direccion"
+                                        Name="Direccion"
+                                        Value={state.Formulario.Direccion.toString()}
+                                        ControlId={state.Ids.Direccion}
+                                        TextId={state.Ids.Direccion}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Direccion}
+                                        Errors={errors}
+                                        PlaceHolder="Av......"
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Telefono"
+                                        Name="Telefono"
+                                        Value={state.Formulario.Telefono}
+                                        ControlId={state.Ids.Telefono}
+                                        TextId={state.Ids.Telefono}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Telefono}
+                                        Errors={errors}
+                                        PlaceHolder="829-965....."
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Correo"
+                                        Name="Correo"
+                                        Value={state.Formulario.Correo}
+                                        ControlId={state.Ids.Correo}
+                                        TextId={state.Ids.Correo}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.Correo}
+                                        Errors={errors}
+                                        PlaceHolder="google@gmail.com"
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="EstadoCivil"
+                                        Name="EstadoCivil"
+                                        Value={state.Formulario.EstadoCivil}
+                                        ControlId={state.Ids.EstadoCivil}
+                                        TextId={state.Ids.EstadoCivil}
+                                        OnChange={handleChangeInput}
+                                        Type="text"
+                                        key={state.Ids.EstadoCivil}
+                                        Errors={errors}
+                                        PlaceHolder="Soltero....."
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Tienes Hijos"
+                                        Name="TienesHijos"
+                                        Value={state.Formulario.TienesHijos}
+                                        ControlId={state.Ids.TienesHijos}
+                                        TextId={state.Ids.TienesHijos}
+                                        OnChange={handleChangeInput}
+                                        Type="number"
+                                        Min={0}
+                                        key={state.Ids.TienesHijos}
+                                        Errors={errors}
+                                        PlaceHolder="0"
+                                    />
+                                </div>
+
+                                <div className="col-sm-6 col-md-4 mb-2 ">
+                                    <InputComponent
+                                        Label="Fecha Nacimiento"
+                                        Name="FechaNacimiento"
+                                        Value={state.Formulario.FechaNacimiento}
+                                        ControlId={state.Ids.FechaNacimiento}
+                                        TextId={state.Ids.FechaNacimiento}
+                                        OnChange={handleChangeInput}
+                                        Type="date"
+                                        key={state.Ids.FechaNacimiento}
+                                        Errors={errors}
+                                        PlaceHolder="FechaNacimiento....."
+                                    />
+                                </div>
+
+                                <Button variant="primary">Guardar</Button>
+                            </Row>
+                        </Container>
+                    </Card.Body>
+                    <Card.Footer className="text-muted">Casi Terminas!!!!</Card.Footer>
+                </Card>
+
+            </BGWaveComponent>
+
         </>
     )
 }

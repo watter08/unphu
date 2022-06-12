@@ -1,8 +1,10 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo,useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 
 const SidebarComponent = () => {
+
+  
 
     const [showMenu, setShowMenu] = useState(true);
 
@@ -10,9 +12,20 @@ const SidebarComponent = () => {
         setShowMenu(!showMenu)
     }, [showMenu])
 
+    useEffect(() => {
+        const mql = window.matchMedia("(min-width: 400px)");
+        mql.addEventListener("change", resize);
+        function resize(e :any) {
+            if (e.matches)
+                setShowMenu(false)
+        }
+        return () => {
+            mql.removeEventListener("change", resize);
+        }
+    },[]);
+
     return(
         <>
-        
         <div className={`sidebar border-t border-gray-700 ${showMenu === true  ? 'showMenu' : 'close'}`}>
                 <div className="logo-details">
                 <label className="MenuHanbButton" htmlFor="check">

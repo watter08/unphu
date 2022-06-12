@@ -6,6 +6,7 @@ import { UserLogInRequestInterface } from "../Models/AuthModels";
 import { useAppDispatch, useAppSelector } from "../Hooks/useReduxHooks";
 import { UserSuccessInterface } from "../Redux/Feactures/Auth/AuthSlice";
 import { useEffect } from "react";
+import { Container,Col , Row,Button } from 'react-bootstrap'
 
 
 const LoginPageComponent = () => {
@@ -52,8 +53,9 @@ const LoginPageComponent = () => {
   return (
     <>
       <LoaderPacmanComponent />
-
-      <section className="LoginSection background-radial-gradient overflow-hidden">
+        <Row>
+          <Col>
+          <section className="LoginSection background-radial-gradient overflow-hidden">
         <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
           <div className="row gx-lg-5 align-items-center mb-5">
             <div className="col-lg-6 mb-5 mb-lg-0" style={{ zIndex: 10 }}>
@@ -104,9 +106,9 @@ const LoginPageComponent = () => {
                         />
                       </div>
 
-                      <button className="btn btn-primary btn-block mb-4" onClick={() => handleSubmitResquest()}>
+                      <Button onClick={() => handleSubmitResquest()}>
                         Ingresar
-                      </button>
+                      </Button>
                     </div>           
                 </div>
               </div>
@@ -114,6 +116,10 @@ const LoginPageComponent = () => {
           </div>
         </div>
       </section>
+          </Col>
+        </Row>
+
+      
     </>
   )
 }

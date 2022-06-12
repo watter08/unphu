@@ -32,22 +32,23 @@ const TableComponent = ({
 
     const HandleInputChange = ({ currentTarget: input }: any) => {
         setSortInputTable(prevState => { return { ...prevState, sortInput: input.value } })
-        SortableWithPagination(0);
+        SortableWithPagination(0,input.value);
     };
 
     const handleOnClickPagination = (current: number) => {
         setSortInputTable(prevState => { return { ...prevState, CurrentPage: current } });
-        SortableWithPagination(current);
+        SortableWithPagination(current ,"");
     }
 
-    const SortableWithPagination = (current: number) => {
+    const SortableWithPagination = (current: number , sort?:string) => {
         //Data To Shw In Table        
         let newData = { ...sortInputTable };
         let prevPage = current <= 0 ? 1 : current >= newData.PageNumbers.length ? newData.PageNumbers.length : current;
+        let SortStr:string  = sort??newData.sortInput??"";
         let Datos = Data.map((dat: any, index: number) => {
             return Columns.map((col: any) => (dat[String(col.Name)])).concat()
         });
-        if (sortInputTable.sortInput.length > 0)
+        if (SortStr.length > 0)
             Datos = Datos.filter((val: any) => String(val).toLowerCase().includes(sortInputTable.sortInput.toLowerCase()))
         const indexOfLastTodo = prevPage * newData.PerPage;
         const indexOfFirstTodo = indexOfLastTodo - newData.PerPage;

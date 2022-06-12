@@ -56,7 +56,7 @@ const DashboardComponentPage = () => {
         backgroundColor: string;
     }
 
-    const InitialState: InitialChart = {
+    let InitialState: InitialChart = {
         UserChartMonth: {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
             datasets: [
@@ -117,36 +117,37 @@ const DashboardComponentPage = () => {
         let newState:InitialChart = {...state}  
         newState.UsersChartList = UsersChartList;
         //user chart day datasets data
-        let UserChartMonthDatasetData = CalculateUserByMonth(newState);
+        let UserChartMonthDatasetData:number[] = CalculateUserByMonth(newState);
          //user chart day datasets data
-         let UserChartYearDatasetData = CalculateUserByYear(newState);
+         let UserChartYearDatasetData:number[] = CalculateUserByYear(newState);
           //user chart day datasets data
-         let UserChartDayDatasetData = CalculateUserByDay(newState);
+         let UserChartDayDatasetData:number[] = CalculateUserByDay(newState);
+         
+         newState.UserChartMonth.datasets = newState.UserChartMonth.datasets.map((val:any) => ({...val , data :UserChartMonthDatasetData}));
+         newState.UserChartYear.datasets = newState.UserChartYear.datasets.map((val:any) => ({...val , data :UserChartYearDatasetData}));
+         newState.UserChartDay.datasets = newState.UserChartDay.datasets.map((val:any) => ({...val , data :UserChartDayDatasetData}));
 
-         newState.UserChartMonth.datasets[0].data = UserChartMonthDatasetData;
-          newState.UserChartYear.datasets[0].data = UserChartYearDatasetData;
-          newState.UserChartDay.datasets[0].data = UserChartDayDatasetData;
-        setState (prevState => { return {...prevState , newState}});
+        setState (newState);
 
     }, [UsersChartList])
 
     const CalculateUserByMonth= (newState:InitialChart) => {
         let UserChartMonthDatasetData = newState.UserChartMonth.labels.map((month:any , index : number) => {
-            return newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getMonth() === index).length
+            return Number(newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getMonth() === index).length)
         })
        return  UserChartMonthDatasetData;   
     }
 
     const CalculateUserByYear = (newState:InitialChart) => {
         let UserChartYearDatasetData = newState.UserChartYear.labels.map((month:number , index : number) => {
-            return newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getFullYear() == month).length
+            return Number(newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getFullYear() == month).length)
         })
         return UserChartYearDatasetData; 
     }
 
     const CalculateUserByDay = (newState:InitialChart) => {
         let UserChartDayDatasetData = newState.UserChartDay.labels.map((month:number , index : number) => {
-            return newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getDay() == index).length
+            return Number(newState.UsersChartList.filter((user:IUserListToDash) => new Date(user.fechaCreacion).getDay() == index).length)
         })
         return UserChartDayDatasetData; 
     }

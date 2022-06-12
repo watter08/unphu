@@ -6,6 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Informacion Relevante
+### Ruta FrontEnd: https://unphu.vercel.app
+### Ruta Backend https://getdataforcrud20220612122900.azurewebsites.net/swagger/index.html
+### Usuario: ilbertca27 Password: castillo4321*
 ### `npm start`
 
 Runs the app in the development mode.\

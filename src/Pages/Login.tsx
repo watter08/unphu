@@ -30,7 +30,7 @@ const LoginPageComponent = () => {
   const Validations = Object.freeze({
     Formulario: {
       Usuario: (user: string) => String(user).length < 6 ? 'El Usuario Debe Tener Al Menos 6 Caracteres' : '',
-      Password: (clave: string) => !isValidPassword(clave) ? 'Contraseña Debe Tener De 8 a 15 Caracteres, Una Mayuscula, Un Numero Y Un caracter Especial' : ''
+      Password: (clave: string) => !isValidPassword(clave) ? 'Contraseña Debe Tener De 8 a 15 Caracteres, Un Numero Y Un caracter Especial' : ''
     }
   })
 
